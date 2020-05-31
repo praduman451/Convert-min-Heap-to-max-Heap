@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+void how(int arr[], int i, int n)
+{
+    int p = 2*i + 1;
+    int q = 2*i + 2;
+    int largest = i;
+    if (p < n && arr[p] > arr[i])
+        largest = p;
+    if (q < n && arr[q] > arr[largest])
+        largest = q;
+    if (largest != i)
+    {
+      int temp = arr[i];
+      arr[i] = arr[largest];
+      arr[largest] = temp;
+        how(arr, largest, n);
+    }
+}
+void modifyMintoMax(int array[], int n)
+{
+  int i;
+for (i = (n-2)/2; i >= 0; --i)
+        how(array, i, n);
+}
+
+int main()
+{
+  int a[20], t, n, i;
+  scanf("%d", &t);
+  while(t--)
+  {
+    scanf("%d", &n);
+    for(i=0;i<n;i++)
+      scanf("%d", &a[i]);
+    modifyMintoMax(a, n);
+    for(i=0;i<n;i++)
+      printf("%d ", a[i]);
+    printf("\n");
+  }
+  return 0;
+}
